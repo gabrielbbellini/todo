@@ -1,0 +1,30 @@
+POST http://localhost:8000/tasks
+Content-Type: application/json
+
+{
+    "title": "Improve node.js skills",
+    "description": "Create a CRUD system using node.js + express + mysql"
+}
+
+###
+
+GET http://localhost:8000/tasks/
+
+###
+
+GET http://localhost:8000/tasks/24
+
+###
+
+PUT http://localhost:8000/tasks
+Content-Type: application/json
+
+{
+    "id": 24,
+    "title": "Improve my node.js skills by...",
+    "description": "creating a CRUD system using node.js + express + mysql."
+}
+
+### 
+
+DELETE http://localhost:8000/tasks/18
