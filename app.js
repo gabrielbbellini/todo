@@ -1,8 +1,11 @@
 const express = require("express");
-const path = require("path")
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
+
+const cors = require("cors");
+const corsOptions = { origin: ["http://localhost:8080"] };
+app.use(cors(corsOptions));
 
 const todoRouter = require("./routes/todo");
 app.use(todoRouter);
