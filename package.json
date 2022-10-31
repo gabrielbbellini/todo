@@ -1,0 +1,22 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "todo list api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "author": "Gabriel de Brito Bellini",
+  "license": "MIT",
+  "keywords": [
+    "todo",
+    "list",
+    "todo-list",
+    "todo_list"
+  ],
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20"
+  }
+}
