@@ -7,7 +7,6 @@ const connectionConfiguration = {
     database: "todo",
 }
 
-
 const database = {
     connection: null,
 
