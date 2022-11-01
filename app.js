@@ -7,7 +7,7 @@ const cors = require("cors");
 const corsOptions = { origin: ["http://localhost:8080"] };
 app.use(cors(corsOptions));
 
-const todoRouter = require("./routes/todo");
+const todoRouter = require("./routes/todo/todo");
 app.use(todoRouter);
 
 const PORT = process.env.PORT || 8000; 
