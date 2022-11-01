@@ -34,7 +34,7 @@ describe("todo", () => {
     });
 
     test("deleteTaskById", async () => {
-        const response = await fetch("http://localhost:8000/tasks/2", setFetchConfiguration("DELETE"));
+        const response = await fetch("http://localhost:8000/tasks/1", setFetchConfiguration("DELETE"));
         expect(response.status).toBe(200);
     });
 
