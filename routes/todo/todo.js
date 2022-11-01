@@ -4,7 +4,6 @@ const router = express.Router();
 const todoController = require("../../controllers/todo");
 
 router.post("/tasks", (request, response) => {
-    console.log(request.body);
     todoController.createTask(request.body, response);
 });
 
