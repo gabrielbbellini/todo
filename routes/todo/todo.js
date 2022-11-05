@@ -7,7 +7,7 @@ router.post("/tasks", (request, response) => {
     todoController.createTask(request.body, response);
 });
 
-router.get("/tasks", (request, response) => {
+router.get("/tasks", (_, response) => {
     todoController.listTasks(response);
 });
 
@@ -16,8 +16,9 @@ router.get("/tasks/:id", (request, response) => {
     todoController.getTask(id, response);
 });
 
-router.put("/tasks", (request, response) => {
-    todoController.updateTask(request.body, response);
+router.put("/tasks/:id", (request, response) => {
+    const { id } = request.params;
+    todoController.updateTask(id, request.body, response);
 });
 
 router.delete("/tasks/:id", (request, response) => {

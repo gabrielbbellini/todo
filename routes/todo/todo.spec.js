@@ -1,6 +1,6 @@
 const fetch = require("cross-fetch");
 
-const setFetchConfiguration = (method, body) => {
+const acquireFetchConfiguration = (method, body) => {
     method = method;
     headers = {
         "Content-type": "application/json",
@@ -13,7 +13,7 @@ const setFetchConfiguration = (method, body) => {
 describe("todo", () => {
     test("createTask", async () => {
         const task = { title: "Jest", description: "Jest description" };
-        const response = await fetch("http://localhost:8000/tasks", setFetchConfiguration("POST", task));
+        const response = await fetch("http://localhost:8000/tasks", acquireFetchConfiguration("POST", task));
         expect(response.status).toBe(200);
     });
 
@@ -29,12 +29,12 @@ describe("todo", () => {
 
     test("updateTask", async () => {
         const task = { id: 1, title: "Jest updated", description: "Jest description updated" };
-        const response = await fetch("http://localhost:8000/tasks/", setFetchConfiguration("PUT", task));
+        const response = await fetch("http://localhost:8000/tasks/1", acquireFetchConfiguration("PUT", task));
         expect(response.status).toBe(200);
     });
 
     test("deleteTaskById", async () => {
-        const response = await fetch("http://localhost:8000/tasks/1", setFetchConfiguration("DELETE"));
+        const response = await fetch("http://localhost:8000/tasks/1", acquireFetchConfiguration("DELETE"));
         expect(response.status).toBe(200);
     });
 

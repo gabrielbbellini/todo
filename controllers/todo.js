@@ -1,25 +1,28 @@
-const todoModule = require("../modules/todo")
+const todoModule = require("../modules/todo");
+const ControllerError = require("./controllerError");
 
 class TodoController {
     createTask = (task, response) => {
         const isTitleEmpty = !task.title?.trim();
         if(isTitleEmpty) {
-            response.status(422).json({ message: "título da task deve ser informado." });
+            const controllerError = new ControllerError(422, "título da task deve ser informado.")
+            response.status(controllerError.status).json(controllerError);
             return;
         }
         
         const isDescriptionEmpty = !task.description?.trim();
         if(isDescriptionEmpty) {
-            response.status(422).json({ message: "descrição da task deve ser informada." });
+            const controllerError = new ControllerError(422, "descrição da task deve ser informada.")
+            response.status(controllerError.status).json(controllerError);
             return;
         }
         todoModule.createTask(task, response);
     };
 
     getTask(taskId, response) {
-        const isIdNotANumber = isNaN(taskId);
-        if(isIdNotANumber) {
-            response.status(422).json({ message: "id da task não é válido." });
+        if(isNaN(taskId)) {
+            const controllerError = new ControllerError(422, "id da task não é válido.")
+            response.status(controllerError.status).json(controllerError);
             return;   
         }
         todoModule.getTask(taskId, response);
@@ -29,35 +32,37 @@ class TodoController {
         todoModule.listTasks(response);
     };
 
-    updateTask(task, response) {
-        const isIdNotANumber = isNaN(task.id);
-        if(isIdNotANumber) {
-            response.status(422).json({ message: "id da task não é válido." });
+    updateTask(id, task, response) {
+        if(isNaN(id)) {
+            const controllerError = new ControllerError(400, "id da task não é válido.")
+            response.status(controllerError.status).json(controllerError);
             return;   
         }
 
         const isTitleEmpty = !task.title?.trim();
         if(isTitleEmpty) {
-            response.status(422).json({ message: "título da task deve ser informado." });
+            const controllerError = new ControllerError(422, "título da task deve ser informado.")
+            response.status(controllerError.status).json(controllerError);
             return;
         }
         
         const isDescriptionEmpty = !task.description?.trim();
         if(isDescriptionEmpty) {
-            response.status(422).json({ message: "descrição da task deve ser informada." });
+            const controllerError = new ControllerError(422, "descrição da task deve ser informada.")
+            response.status(controllerError.status).json(controllerError);
             return;
         }
 
-        todoModule.updateTask(task, response);
+        todoModule.updateTask(id, task, response);
     };
 
     deleteTask(taskId, response) {
         const isIdNotANumber = isNaN(taskId);
+        const controllerError = new ControllerError(400, "id da task não é válido.")
         if(isIdNotANumber) {
-            response.status(422).json({ message: "id da task não é válido." });
+            response.status(controllerError.status).json(controllerError);
             return;   
         }
-
         todoModule.deleteTask(taskId, response);
     };
 }

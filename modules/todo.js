@@ -1,12 +1,15 @@
 const database = require("../configs/database/database");
 
+const ModuleError = require('./moduleError')
+
 class TodoModule {
     createTask = (task, response) => {
         const query = "INSERT INTO task (title, description) VALUES (?, ?)";
         const values = [task.title, task.description];
         const executeOnFinishQuery = (error, _) => {
             if(error) {
-                response.status(500).send(error);
+                const moduleError = new ModuleError(500, error.message || "Unexpected error.");
+                response.status(500).send(moduleError);
                 return;
             }
 
@@ -21,7 +24,8 @@ class TodoModule {
         const query = "SELECT id, title, description, modified_at FROM task";
         const executeOnFinishQuery = (error, result) => {
             if(error) {
-                response.status(500).send(error);
+                const moduleError = new ModuleError(500, error.message || "Unexpected error.");
+                response.status(500).send(moduleError);
                 return;
             }
 
@@ -36,7 +40,8 @@ class TodoModule {
         const values = [taskId];
         const executeOnFinishQuery = (error, result) => {
             if(error) {
-                response.status(500).send(error);
+                const moduleError = new ModuleError(500, error.message || "Unexpected error.");
+                response.status(500).send(moduleError);
                 return;
             }
 
@@ -46,12 +51,13 @@ class TodoModule {
         database.query(query, values, executeOnFinishQuery);
     };
 
-    updateTask(task, response) {
+    updateTask(id, task, response) {
         const query = "UPDATE task SET title = ?, description = ? WHERE id = ?";
-        const values = [task.title, task.description, task.id];
+        const values = [task.title, task.description, id];
         const executeOnFinishQuery = (error, result) => {
             if(error) {
-                response.status(500).send(error);
+                const moduleError = new ModuleError(500, error.message || "Unexpected error.");
+                response.status(500).send(moduleError);
                 return;
             }
 
@@ -66,7 +72,8 @@ class TodoModule {
         const values = [taskId];
         const executeOnFinishQuery = (error, result) => {
             if(error) {
-                response.status(500).send(error);
+                const moduleError = new ModuleError(500, error.message || "Unexpected error.");
+                response.status(500).send(moduleError);
                 return;
             }
 

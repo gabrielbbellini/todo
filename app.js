@@ -10,9 +10,8 @@ app.use(cors(corsOptions));
 const todoRouter = require("./routes/todo/todo");
 app.use(todoRouter);
 
-const PORT = process.env.PORT || 8000; 
-
 const database = require("./configs/database/database");
 database.init();
 
+const PORT = process.env.PORT || 8000; 
 app.listen(PORT, () => console.log("service is running on port " + PORT));
